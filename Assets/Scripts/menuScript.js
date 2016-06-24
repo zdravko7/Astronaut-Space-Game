@@ -4,7 +4,11 @@ function Start () {
 
 }
 
-function onClick() {
+function startLevel() {
+    Application.LoadLevel ("gameScene"); 
+}
+
+function restartLevel() {
     Application.LoadLevel ("gameScene"); 
 }
 

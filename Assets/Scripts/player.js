@@ -4,13 +4,11 @@ var movementSpeed = 0.7;
 var projectile : Rigidbody2D;
 var projectileSpeed = 20;
 var obstacle : Rigidbody2D;
+var circle : GameObject;
 
 function Start () {
-    /*var lineRenderer = gameObject.AddComponent(LineRenderer);
-    //lineRenderer.material = new Material(Shader.Find("Materials/physicsMaterial")); //add a material
-    lineRenderer.SetColors(Color.red, Color.gray);
-    lineRenderer.SetVertexCount(10);
-    lineRenderer.SetWidth(0.2, 0.2);*/
+    //Resets score
+    PlayerPrefs.SetInt("Score", 0);
 }
 
 var targetPoint:Vector3;
@@ -35,37 +33,31 @@ function Update () {
         var ray = Camera.main.ScreenPointToRay (Input.mousePosition);
         targetPoint = ray.GetPoint(hitdist);
         GetComponent(Animator).enabled = true;
+
+        cursorInWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Instantiate(circle, new Vector3(cursorInWorldPos.x, cursorInWorldPos.y, 0), transform.rotation);
     }
 
     //handles player rotation
     var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10.0);
-
     var dir = mousePos - transform.position;
     var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-    transform.eulerAngles.z = angle - 90;
-
-    //draw the laser
-    /*var lineRenderer = GetComponent(LineRenderer);
-    lineRenderer.SetPosition(0, dir*10);
-    */
     
+    transform.eulerAngles.z = angle - 90;
     transform.position = Vector3.Lerp (transform.position, targetPoint, Time.deltaTime * movementSpeed);   
+    
+    //updates score
+    GameObject.Find("score").GetComponent(UI.Text).text = "Score: " + PlayerPrefs.GetInt("Score");
 }
 
-/*function createCircle(x, y)
-{
-    var line = new LineRenderer();
-
+/*function createCircle(x : float, y : float,xradius : float, yradius : float, segments : float, angle : float) {
+ 
     var xo = 0;
     var yo = 0;
     var xn = 0;
     var yn = 0;
-    var xradius = 50;
-    var yradius = 50;
-    var segments = 26;
-    var angle = 0;
-
-    for (var i = 0; i < ((segments) + 1); i++) {
+ 
+    for (var i = 0; i < (segments + 1); i++) {
         xn = Mathf.Sin(Mathf.Deg2Rad * angle) * xradius;
         yn = Mathf.Cos(Mathf.Deg2Rad * angle) * yradius;
         if (i > 0)
@@ -75,3 +67,22 @@ function Update () {
         angle += (360.0 / segments);
     }
 }*/
+
+    /*function CreatePoints ()
+    {
+        var x;
+        var y;
+        var z = 0.0;
+       
+        var angle = 20.0;
+       
+        for (var i = 0; i < (segments + 1); i++)
+        {
+            x = Mathf.Sin (Mathf.Deg2Rad * angle) * xradius;
+            y = Mathf.Cos (Mathf.Deg2Rad * angle) * yradius;
+                   
+            line.SetPosition (i,new Vector3(0,0,0) );
+                   
+            angle += (360.0 / segments);
+        }
+    }*/
