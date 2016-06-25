@@ -1,9 +1,5 @@
 ﻿#pragma strict
 
-function Start () {
-
-}
-
 function startLevel() {
     Application.LoadLevel ("gameScene"); 
 }

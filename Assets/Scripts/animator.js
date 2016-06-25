@@ -2,10 +2,6 @@
 
 var timer = 85;
 
-function Start () {
-
-}
-
 function Update () {
     timer--;
 

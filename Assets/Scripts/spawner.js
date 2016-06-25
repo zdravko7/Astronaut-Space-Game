@@ -5,10 +5,6 @@ var asteroid : Transform;
 var enemyMovementSpeed = 0.2;
 var spawnTime = 1;
 var time = 1;
-
-// Use this for initialization
-function Start () {
-}
 	
 // Update is called once per frame
 function Update () {
@@ -17,11 +13,11 @@ function Update () {
 
     if (time % (spawnTime * 100) == 0)
     {
-        ZombieSpawner();
+        rocketSpawner();
     }
 }
 
-function ZombieSpawner() {
+function rocketSpawner() {
 
     var x = Random.Range(-8, 8);
     var y = Random.Range(-4, 4);

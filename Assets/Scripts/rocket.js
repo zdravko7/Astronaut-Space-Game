@@ -4,9 +4,6 @@ var projectileSpeed = 8;
 var animationTime = 0;
 var animator : GameObject;
 
-function Start () {
-}
-
 function Update () {
     transform.Translate(Vector2.up * Time.deltaTime * projectileSpeed);
 }
