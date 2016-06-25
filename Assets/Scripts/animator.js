@@ -11,6 +11,5 @@ function Update () {
 
     if (timer == 0) {
         Destroy(gameObject);
-    }
-
+    } 
 }
